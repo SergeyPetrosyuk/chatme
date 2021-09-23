@@ -23,6 +23,8 @@
 # Flutter/Dart/Pub related
 **/doc/api/
 **/ios/Flutter/.last_build_id
+**/ios/Runner/GoogleService-Info.plist
+**/app/google-services.json
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
@@ -44,3 +46,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+/android/app/google-services.json
+/ios/Runner/GoogleService-Info.plist
