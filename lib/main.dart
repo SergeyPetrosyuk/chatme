@@ -1,5 +1,7 @@
 import 'package:chatme/auth/auth_route.dart';
 import 'package:chatme/chat/chat_route.dart';
+import 'package:chatme/navigation/routes.dart';
+import 'package:chatme/profile/profile_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -38,13 +40,16 @@ class MyApp extends StatelessWidget {
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (builderContext, AsyncSnapshot<User?> userSnapshot) {
-          if(userSnapshot.hasData){
+          if (userSnapshot.hasData) {
             return ChatRoute();
           } else {
             return AuthRoute();
           }
         },
       ),
+      routes: {
+        Routes.PROFILE: (builderContext) => ProfileRoute(),
+      },
     );
   }
 }

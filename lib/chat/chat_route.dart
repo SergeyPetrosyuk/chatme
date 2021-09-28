@@ -1,5 +1,6 @@
 import 'package:chatme/chat/widget/chat_messages.dart';
 import 'package:chatme/chat/widget/compose_message.dart';
+import 'package:chatme/navigation/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -20,13 +21,33 @@ class ChatRoute extends StatelessWidget {
                 items: [
                   DropdownMenuItem(
                     onTap: () {},
+                    value: 'profile',
+                    child: Container(
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.person_outline_rounded,
+                            color: Theme
+                                .of(context)
+                                .primaryColor,
+                          ),
+                          SizedBox(width: 16),
+                          Text('Profile')
+                        ],
+                      ),
+                    ),
+                  ),
+                  DropdownMenuItem(
+                    onTap: () {},
                     value: 'logout',
                     child: Container(
                       child: Row(
                         children: [
                           Icon(
                             Icons.exit_to_app_rounded,
-                            color: Theme.of(context).primaryColor,
+                            color: Theme
+                                .of(context)
+                                .primaryColor,
                           ),
                           SizedBox(width: 16),
                           Text('Logout')
@@ -36,9 +57,11 @@ class ChatRoute extends StatelessWidget {
                   )
                 ],
                 onChanged: (itemIdentifier) {
-                  if (itemIdentifier == 'logout') {
+                  if (itemIdentifier == 'logout')
                     FirebaseAuth.instance.signOut();
-                  }
+
+                  if (itemIdentifier == 'profile')
+                    Navigator.of(context).pushNamed(Routes.PROFILE);
                 },
               ),
             )
