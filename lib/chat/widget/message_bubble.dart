@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class MessageBubble extends StatelessWidget {
   final String messageText;
   final String username;
+  final String? avatarUrl;
   final bool ownMessage;
   final Key key;
 
@@ -12,9 +13,25 @@ class MessageBubble extends StatelessWidget {
   MessageBubble({
     required this.messageText,
     required this.username,
+    required this.avatarUrl,
     required this.ownMessage,
     required this.key,
   });
+
+  Widget get _buildUserAvatar => Padding(
+        padding: ownMessage
+            ? const EdgeInsets.only(left: 8.0)
+            : EdgeInsets.only(right: 8.0),
+        child: CircleAvatar(
+          backgroundColor: Colors.white54,
+          radius: 15,
+          child: CircleAvatar(
+            radius: 13,
+            backgroundImage:
+                avatarUrl == null ? null : NetworkImage(avatarUrl!),
+          ),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +50,7 @@ class MessageBubble extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
               decoration: BoxDecoration(
                 color: ownMessage
-                    ? Theme.of(context).accentColor
+                    ? Theme.of(context).colorScheme.secondary
                     : Theme.of(context).primaryColorDark,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(16),
@@ -43,15 +60,26 @@ class MessageBubble extends StatelessWidget {
                 ),
               ),
               child: Column(
+                crossAxisAlignment: ownMessage
+                    ? CrossAxisAlignment.end
+                    : CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    username,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (!ownMessage) _buildUserAvatar,
+                      Text(
+                        username,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      if (ownMessage) _buildUserAvatar,
+                    ],
                   ),
+                  SizedBox(height: 16),
                   Text(
                     messageText,
                     style: TextStyle(
-                      color: Theme.of(context).accentTextTheme.headline1!.color,
+                      color: Colors.white,
                     ),
                   ),
                 ],

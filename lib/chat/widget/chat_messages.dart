@@ -31,11 +31,13 @@ class ChatMessages extends StatelessWidget {
                     final text = data.docs[index].get('text');
                     final uid = data.docs[index].get('uid');
                     final username = data.docs[index].get('username');
+                    final avatar = data.docs[index].get('avatar');
                     final currentUid = _auth.currentUser!.uid;
                     return MessageBubble(
                       messageText: text,
                       ownMessage: uid == currentUid,
                       username: username,
+                      avatarUrl: avatar,
                       key: ValueKey(data.docs[index].id),
                     );
                   },

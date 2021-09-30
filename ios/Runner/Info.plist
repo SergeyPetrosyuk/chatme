@@ -42,8 +42,8 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We need an image</string
+	<string>We need an image</string>
 	<key>NSMicrophoneUsageDescription</key>
-    <string>We need an image</string
+    <string>We need an image</string>
 </dict>
 </plist>

@@ -28,6 +28,7 @@ class _ComposeMessageState extends State<ComposeMessage> {
         'text': _messageController.text,
         'created_at': Timestamp.now(),
         'username': userData['username'],
+        'avatar': userData['avatar'],
       });
       _messageController.clear();
       setState(() => _message = '');
@@ -63,7 +64,10 @@ class _ComposeMessageState extends State<ComposeMessage> {
             Expanded(
               child: TextField(
                 controller: _messageController,
-                decoration: InputDecoration(labelText: 'message'),
+                decoration: InputDecoration(
+                  labelText: 'message',
+                  border: InputBorder.none,
+                ),
                 onChanged: (value) {
                   setState(() => _message = value);
                 },
